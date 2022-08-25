@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>News App</title>
+	<style>
+		*{font-size:40px;font-family:Calibri,Arial,Courier;}
+	</style>
+</head>
+
+<body>
+<center>
+	<h1>Select Source from NEWS</h1>
+	<form method="POST">
+	{% csrf_token %}	
+		<select name="src" style = "width:40%">
+			<option value=""></option>
+			<option value="the-times-of-india">Times Of India</option>		
+			<option value="the-hindu">The Hindu</option>	
+			<option value="fox-news">Fox-News</option>
+			<option value="abc-news">ABC News</option>
+			<option value="google-news-in">Google News</option>
+			<option value="crypto-coins-news">Crypto News</option>
+		</select>
+		<input type="submit" name="btn">
+	</form>
+	{% if src %}
+		<h2>News From {{src}}</h2>
+		{% for m in msg %}
+			<h2>{{ m.title }}</h2>
+			<h2><a href="{{ m.url }}">Read More</a></h2>
+			<img src={{ m.urlToImage }} style="width:200px;height:auto;"></img>
+			<hr>
+		{% endfor %}
+	{% endif %}
+	
+	
+</center>
+</body>
+</html>
